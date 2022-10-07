@@ -1,27 +1,24 @@
 ---
-title: Getting started
+title: Package sending
 description: Get started with sending your first package.
 ---
 
-Sending your first package with our API is very simple.
+## Setup package sending
 
----
+Sending a package through Izipack consists of three main API operations:
+1. Creating a shipping order
+2. Fetch the shipment label that should physically go onto the package for correct sending
+3. Keeping track of the order status
 
-## Quis vel iste dicta
+### Create a shipping order
 
-Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur.
+An order is created using the Order/create call, the most important information here is the receiverAddress, and the package details (dimensions, weight, etc). This call returns the orderNumber that can then be used to fetch the label and status.
 
-### Code block example
+### Fetch shipment label
 
-Je kan een code block maken en erbij zetten welke taal het is.
+A PDF of the label that is to be attached to the package can be fetched via the Order/label call using the orderNumber returned during creation
 
-```js
-/** @type {import('@tailwindlabs/lorem').ipsum} */
-export default {
-  lorem: 'ipsum',
-  dolor: ['sit', 'amet', 'consectetur'],
-  adipiscing: {
-    elit: true,
-  },
-}
-```
+### Get order status
+
+Polling the current status of a shipment can be done by fetching Order/order using the orderNumber returned during creation
+

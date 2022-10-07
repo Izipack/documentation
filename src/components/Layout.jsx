@@ -17,13 +17,12 @@ const navigation = [
     title: 'Introduction',
     links: [
       { title: 'Getting started', href: '/' },
-      { title: 'Installation', href: '/docs/installation' },
     ],
   },
   {
     title: 'Shipping API',
     links: [
-      { title: 'Getting started', href: '/docs/shippingapi-gettingstarted' },
+      { title: 'Sending packages', href: '/docs/shippingapi-gettingstarted' },
     ],
   },
 ]
