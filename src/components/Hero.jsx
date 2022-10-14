@@ -8,12 +8,18 @@ import blurCyanImage from '@/images/blur-cyan.png'
 import blurIndigoImage from '@/images/blur-indigo.png'
 
 const codeLanguage = 'javascript'
-const code = `export izipack {
-  strategy: 'predictive',
-  engine: {
-    cpus: 12,
-    backups: ['./storage/izipack.wtf'],
-  },
+const code = `{
+  "Packages": [
+    {
+      "Dimensions": {
+        "Width": 15,
+        "Height": 16,
+        "Depth": 17,
+        "Weight": 18
+      },
+      "Description": "package izipack"
+    }
+  ],
 }`
 
 const tabs = [
