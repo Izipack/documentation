@@ -14,11 +14,14 @@ Sending a package through Izipack consists of three main API operations:
 
 An order is created using the Order/create call, the most important information here is the receiverAddress, and the package details (dimensions, weight, etc). This call returns the orderNumber that can then be used to fetch the label and status.
 
-The exact schema can be found here: https://shipping-api.izipack.nl/index.html 
+The exact schema can be found in our [Swagger documentation](https://shipping-api.izipack.nl/index.html)
 
 A sample request for a package:
 ```
-{
+curl --location --request POST 'https://shipping-api.acc.izipack.nl/api/Order/create' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: [APIKEYHERE]' \
+--data-raw '{
   "ReceiverAddress": {
     "Name": "Sprookjeswonderland",
     "Country": "NL",
@@ -41,7 +44,7 @@ A sample request for a package:
     }
   ],
   "ExtraInstructions": "Please bring cake"
-}
+}'
 ```
 
 ### Fetch shipment label
@@ -50,7 +53,7 @@ A PDF of the label that is to be attached to the package can be fetched via the 
 
 ```
 curl --location --request GET 'https://shipping-api.izipack.nl/api/Order/label?orderNumber=9IZP576912483' \
---header 'Authorization: [APIKEYHere]'
+--header 'Authorization: [APIKEYHERE]'
 ```
 
 ### Get order status
@@ -59,7 +62,7 @@ Polling the current status of a shipment can be done by fetching Order/order usi
 
 ```
 curl --location --request GET 'https://shipping-api.izipack.nl/api/Order/status?orderNumber=9IZP576912483' \
---header 'Authorization: [APIKEYHere]'
+--header 'Authorization: [APIKEYHERE]'
 ```
 which could return the following reponse
 ```
