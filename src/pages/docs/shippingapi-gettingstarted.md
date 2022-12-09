@@ -16,11 +16,11 @@ An order is created using the Order/create call, the most important information 
 
 The exact schema can be found in our [Swagger documentation](https://shipping-api.izipack.nl/index.html)
 
-A sample request for a package:
+A sample request for package creation:
 ```
 curl --location --request POST 'https://shipping-api.acc.izipack.nl/api/Order/create' \
 --header 'Content-Type: application/json' \
---header 'Authorization: [APIKEYHERE]' \
+--header 'x-api-key: IZI-...sanitized..' \
 --data-raw '{
   "ReceiverAddress": {
     "Name": "Sprookjeswonderland",
@@ -53,7 +53,7 @@ A PDF of the label that is to be attached to the package can be fetched via the 
 
 ```
 curl --location --request GET 'https://shipping-api.izipack.nl/api/Order/label?orderNumber=9IZP576912483' \
---header 'Authorization: [APIKEYHERE]'
+--header 'x-api-key: IZI-...sanitized..'
 ```
 
 ### Get order status
@@ -62,7 +62,7 @@ Polling the current status of a shipment can be done by fetching Order/order usi
 
 ```
 curl --location --request GET 'https://shipping-api.izipack.nl/api/Order/status?orderNumber=9IZP576912483' \
---header 'Authorization: [APIKEYHERE]'
+--header 'x-api-key: IZI-...sanitized..'
 ```
 which could return the following reponse
 ```
