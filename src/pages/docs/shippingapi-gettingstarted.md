@@ -76,6 +76,8 @@ curl --location --request GET 'https://shipping-api.izipack.nl/shipment/{orderNu
 --header 'x-api-key: IZI-...sanitized..'
 ```
 
+The PDF that is returned contains a seperate page for each of the packages created in the order.
+
 ### Get order status
 
 Polling the current status of a shipment can be done by fetching Order/order using the orderNumber returned during creation. A sample request would be:
