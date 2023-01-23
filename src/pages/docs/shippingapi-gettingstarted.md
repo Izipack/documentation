@@ -18,32 +18,52 @@ The exact schema can be found in our [Swagger documentation](https://shipping-ap
 
 A sample request for package creation:
 ```
-curl --location --request POST 'https://shipping-api.acc.izipack.nl/api/Order/create' \
+curl --location --request POST 'https://shipping-api.izipack.nl/shipment' \
 --header 'Content-Type: application/json' \
 --header 'x-api-key: IZI-...sanitized..' \
 --data-raw '{
-  "ReceiverAddress": {
-    "Name": "Sprookjeswonderland",
-    "Country": "NL",
-    "Street": "Kooizandweg",
-    "Housenumber": "9",
-    "Zipcode": "1601 LK",
-    "City": "Enkhuizen",
-    "EmailAddress": "info@izipack.nl",
-    "Phone": "0612345678"
-  },
-  "Packages": [
-    {
-      "Dimensions": {
-        "Width": 150,
-        "Height": 16,
-        "Depth": 40,
-        "Weight": 18500
-      },
-      "Description": "test package izipack"
-    }
-  ],
-  "ExtraInstructions": "Please bring cake"
+    "sender": {
+        "name": "Izipack",
+        "address": {
+            "street": "Dokter de Grootlaan",
+            "housenumber": "3",
+            "city": "Santpoort-Noord",
+            "zipCode": "2071TG",
+            "country": "NL"
+        }
+    },
+    "receiver": {
+        "name": "Sprookjeswonderland",
+        "emailAddress": "info@izipack.nl",
+        "phoneNumber": "0612345678",
+        "address": {
+            "country": "NL",
+            "street": "Kooizandweg",
+            "housenumber": "9",
+            "zipcode": "1601 LK",
+            "city": "Enkhuizen"
+        }
+    },
+    "packages": [
+        {
+            "dimensions": {
+                "width": 150,
+                "height": 16,
+                "depth": 40,
+                "weight": 18500
+            },
+            "description": "package 1 of 2"
+        },
+        {
+            "dimensions": {
+                "height": 18,
+                "width": 42,
+                "depth": 26,
+                "weight": 6134
+            },
+            "description": "package 2 of 2"
+        }
+    ]
 }'
 ```
 
@@ -52,7 +72,7 @@ curl --location --request POST 'https://shipping-api.acc.izipack.nl/api/Order/cr
 A PDF of the label that is to be attached to the package can be fetched via the Order/label call using the orderNumber returned during creation. An example request would be:
 
 ```
-curl --location --request GET 'https://shipping-api.izipack.nl/api/Order/label?orderNumber=9IZP576912483' \
+curl --location --request GET 'https://shipping-api.izipack.nl/shipment/{orderNumber}/label' \
 --header 'x-api-key: IZI-...sanitized..'
 ```
 
@@ -61,15 +81,25 @@ curl --location --request GET 'https://shipping-api.izipack.nl/api/Order/label?o
 Polling the current status of a shipment can be done by fetching Order/order using the orderNumber returned during creation. A sample request would be:
 
 ```
-curl --location --request GET 'https://shipping-api.izipack.nl/api/Order/status?orderNumber=9IZP576912483' \
+curl --location --request GET 'https://shipping-api.izipack.nl/shipment/{orderNumber}' \
 --header 'x-api-key: IZI-...sanitized..'
 ```
 which could return the following reponse
 ```
 {
     "status": "Created",
-    "orderNumber": "9IZP576912483",
-    "createdAt": "2022-12-01T14:56:59",
-    "updatedAt": "2022-12-01T14:56:59"
+    "deliveryDateUtc": "2023-01-24T13:08:25.482314",
+    "description": null,
+    "extraInstructions": null,
+    "companyName": null,
+    "toAttentionOf": null,
+    "packages": [
+        {
+            "labelCode": "7IZP25F79D8C432A4F7490F4DA8704843CD4"
+        },
+        {
+            "labelCode": "7IZP3C12767E8D1341889DE82988644EA04D"
+        }
+    ]
 }
 ```
