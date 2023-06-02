@@ -12,7 +12,7 @@ An API key will be provided once your account is setup. You can request an accou
 Once the API key is obtained it can be used to create shipments by passing it in the x-api-key header
 
 A sample request for package creation that includes the x-api-key header:
-```
+```bash
 curl --location --request POST 'https://shipping-api.izipack.nl/shipment' \
 --header 'Content-Type: application/json' \
 --header 'x-api-key: IZI-...sanitized..' \
