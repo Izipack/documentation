@@ -24,6 +24,7 @@ const navigation = [
     links: [
       { title: 'Authenticating', href: '/docs/shippingapi-authenticating' },
       { title: 'Sending packages', href: '/docs/shippingapi-gettingstarted' },
+      { title: 'Return orders', href: '/docs/shippingapi-returnpackages' },
     ],
   },
 ]

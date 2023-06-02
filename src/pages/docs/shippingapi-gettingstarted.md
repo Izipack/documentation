@@ -12,12 +12,12 @@ Sending a package through Izipack consists of three main API operations:
 
 ### Create a shipping order
 
-An order is created using the Order/create call, the most important information here is the receiverAddress, and the package details (dimensions, weight, etc). This call returns the orderNumber that can then be used to fetch the label and status.
+An order is created using the shipment call, the most important information here is the receiverAddress, and the package details (dimensions, weight, etc). This call returns the orderNumber that can then be used to fetch the label and status.
 
 The exact schema can be found in our [Swagger documentation](https://shipping-api.izipack.nl/index.html)
 
 A sample request for package creation:
-```
+```bash
 curl --location --request POST 'https://shipping-api.izipack.nl/shipment' \
 --header 'Content-Type: application/json' \
 --header 'x-api-key: IZI-...sanitized..' \
@@ -69,9 +69,9 @@ curl --location --request POST 'https://shipping-api.izipack.nl/shipment' \
 
 ### Fetch shipment label
 
-A PDF of the label that is to be attached to the package can be fetched via the Order/label call using the orderNumber returned during creation. An example request would be:
+A PDF of the label that is to be attached to the package can be fetched via the shipment/:orderNumber/label call using the orderNumber returned during creation. An example request would be:
 
-```
+```bash
 curl --location --request GET 'https://shipping-api.izipack.nl/shipment/{orderNumber}/label' \
 --header 'x-api-key: IZI-...sanitized..'
 ```
@@ -80,14 +80,14 @@ The PDF that is returned contains a seperate page for each of the packages creat
 
 ### Get order status
 
-Polling the current status of a shipment can be done by fetching Order/order using the orderNumber returned during creation. A sample request would be:
+Polling the current status of a shipment can be done by fetching shipment/:orderNumber using the orderNumber returned during creation. A sample request would be:
 
-```
+```bash
 curl --location --request GET 'https://shipping-api.izipack.nl/shipment/{orderNumber}' \
 --header 'x-api-key: IZI-...sanitized..'
 ```
 which could return the following reponse
-```
+```json
 {
     "status": "Created",
     "deliveryDateUtc": "2023-01-24T13:08:25.482314",

@@ -20,5 +20,6 @@ After we've created your account, we will provide you with the Authentication to
 {% quick-links %}
 
 {% quick-link title="Package sending" icon="plugins" href="/docs/shippingapi-gettingstarted" description="Step-by-step guide to sending and keeping track of packages via Izipack." /%}
+{% quick-link title="Pickup returns" icon="plugins" href="/docs/shippingapi-returnpackages" description="Step-by-step guide for creating pickup orders for returns via Izipack." /%}
 
 {% /quick-links %}
